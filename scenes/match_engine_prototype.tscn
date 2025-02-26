@@ -1,0 +1,68 @@
+[gd_scene load_steps=12 format=3 uid="uid://l0n4gmg6vni3"]
+
+[ext_resource type="Texture2D" uid="uid://dwno3wyvc1arn" path="res://art/field.png" id="1_bcqu5"]
+[ext_resource type="Script" path="res://scenes/match_engine_prototype.gd" id="1_chp3x"]
+[ext_resource type="Texture2D" uid="uid://b10oiv7bbp4wa" path="res://art/ball.png" id="2_okpxw"]
+[ext_resource type="Texture2D" uid="uid://c4im7w4o7pt12" path="res://art/green_player.png" id="3_byre0"]
+[ext_resource type="Script" path="res://scenes/player_1.gd" id="3_cukqf"]
+[ext_resource type="Texture2D" uid="uid://sgvn74l8fl72" path="res://art/red_player.png" id="4_32mm8"]
+[ext_resource type="Script" path="res://scenes/player_2.gd" id="5_42ovk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lf1vs"]
+size = Vector2(676, 410)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wqda7"]
+radius = 13.1529
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c33dj"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6tej1"]
+radius = 24.0832
+
+[node name="match_engine_prototype" type="Node2D"]
+script = ExtResource("1_chp3x")
+
+[node name="field" type="Area2D" parent="."]
+position = Vector2(679, 342)
+
+[node name="Sprite2D" type="Sprite2D" parent="field"]
+texture = ExtResource("1_bcqu5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="field"]
+position = Vector2(2, 1)
+shape = SubResource("RectangleShape2D_lf1vs")
+
+[node name="ball" type="RigidBody2D" parent="."]
+position = Vector2(680, 341)
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="ball"]
+texture = ExtResource("2_okpxw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
+shape = SubResource("CircleShape2D_wqda7")
+
+[node name="player 1" type="CharacterBody2D" parent="." node_paths=PackedStringArray("ball")]
+position = Vector2(466, 345)
+motion_mode = 1
+script = ExtResource("3_cukqf")
+ball = NodePath("../ball")
+
+[node name="Sprite2D" type="Sprite2D" parent="player 1"]
+texture = ExtResource("3_byre0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player 1"]
+shape = SubResource("CircleShape2D_c33dj")
+
+[node name="player 2" type="CharacterBody2D" parent="." node_paths=PackedStringArray("ball")]
+position = Vector2(887, 344)
+motion_mode = 1
+script = ExtResource("5_42ovk")
+ball = NodePath("../ball")
+
+[node name="Sprite2D" type="Sprite2D" parent="player 2"]
+texture = ExtResource("4_32mm8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player 2"]
+shape = SubResource("CircleShape2D_6tej1")
